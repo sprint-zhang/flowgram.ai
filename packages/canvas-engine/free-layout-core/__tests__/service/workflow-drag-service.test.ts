@@ -28,7 +28,7 @@ async function fireMouseEvent(type: string, point: IPoint): Promise<void> {
       clientY: point.y,
     })
   );
-  await waitFor(() => {}, { timeout: 1 });
+  await waitFor(() => {}, { timeout: 100 });
 }
 
 describe('workflow-drag-service', () => {
@@ -205,6 +205,7 @@ describe('workflow-drag-service', () => {
           id: 'sub_canvas_0',
           type: FlowNodeBaseType.SUB_CANVAS,
           meta: {
+            isContainer: true,
             position: {
               x: 0,
               y: 0,
@@ -506,6 +507,7 @@ describe('workflow-drag-service', () => {
           id: 'sub_canvas_0',
           type: FlowNodeBaseType.SUB_CANVAS,
           meta: {
+            isContainer: true,
             position: { x: 0, y: -500 },
             size: { width: 1000, height: 1000 },
             selectable: true,

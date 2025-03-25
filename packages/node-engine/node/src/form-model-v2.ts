@@ -21,6 +21,7 @@ import {
   Glob,
   IField,
   IFieldArray,
+  toForm,
 } from '@flowgram.ai/form';
 import { FlowNodeEntity } from '@flowgram.ai/document';
 import { PlaygroundContext } from '@flowgram.ai/core';
@@ -132,6 +133,10 @@ export class FormModelV2 extends FormModel implements Disposable {
 
   get formMeta() {
     return this.node.getNodeRegistry().formMeta;
+  }
+
+  get values() {
+    return this.nativeFormModel?.values;
   }
 
   protected _feedbacks: FormFeedback[] = [];
@@ -256,6 +261,7 @@ export class FormModelV2 extends FormModel implements Disposable {
               value: get(values, currentName),
               prevValue: get(prevValues, currentName),
               formValues: values,
+              form: toForm(this.nativeFormModel!),
               context: this.nodeContext,
             });
 
@@ -298,6 +304,7 @@ export class FormModelV2 extends FormModel implements Disposable {
                   value: get(values, path),
                   formValues: values,
                   prevValue: get(prevValues, path),
+                  form: toForm(this.nativeFormModel!),
                   context: this.nodeContext,
                 });
 
@@ -332,6 +339,7 @@ export class FormModelV2 extends FormModel implements Disposable {
               effect({
                 ...props,
                 formValues: nativeFormModel.values,
+                form: toForm(this.nativeFormModel!),
                 context: this.nodeContext,
               })
             );
